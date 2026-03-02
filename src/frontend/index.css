@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Fonts ─────────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Dark theme (primary) */
+    --background: 0.1 0.005 240;
+    --foreground: 0.95 0.01 200;
+    --card: 0.14 0.01 240;
+    --card-foreground: 0.95 0.01 200;
+    --popover: 0.14 0.01 240;
+    --popover-foreground: 0.95 0.01 200;
+
+    --primary: 0.75 0.16 195;
+    --primary-foreground: 0.1 0.005 240;
+
+    --secondary: 0.18 0.015 240;
+    --secondary-foreground: 0.95 0.01 200;
+
+    --muted: 0.18 0.015 240;
+    --muted-foreground: 0.55 0.02 200;
+
+    --accent: 0.72 0.18 185;
+    --accent-foreground: 0.08 0.005 240;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.25 0.025 210;
+    --input: 0.22 0.02 210;
+    --ring: 0.75 0.16 195;
+
+    --chart-1: 0.75 0.16 195;
+    --chart-2: 0.65 0.14 170;
+    --chart-3: 0.55 0.12 200;
+    --chart-4: 0.45 0.1 180;
+    --chart-5: 0.35 0.08 220;
+
+    --sidebar: 0.12 0.01 240;
+    --sidebar-foreground: 0.95 0.01 200;
+    --sidebar-primary: 0.75 0.16 195;
+    --sidebar-primary-foreground: 0.1 0.005 240;
+    --sidebar-accent: 0.18 0.015 240;
+    --sidebar-accent-foreground: 0.95 0.01 200;
+    --sidebar-border: 0.25 0.025 210;
+    --sidebar-ring: 0.75 0.16 195;
+
+    /* Custom brand tokens */
+    --teal: 0.75 0.16 195;
+    --teal-dim: 0.6 0.13 195;
+    --teal-glow: 0.8 0.2 185;
+    --surface: 0.13 0.01 240;
+    --surface-raised: 0.17 0.015 240;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+}
+
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.75 0.16 195 / 0.3), 0 0 60px oklch(0.75 0.16 195 / 0.1); }
+  50% { box-shadow: 0 0 40px oklch(0.75 0.16 195 / 0.5), 0 0 100px oklch(0.75 0.16 195 / 0.2); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes accordion-down {
+  from { height: 0 }
+  to { height: var(--radix-accordion-content-height) }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height) }
+  to { height: 0 }
+}
+
+/* ─── Utility Classes ────────────────────────────────────── */
+.font-display {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.font-body {
+  font-family: "Outfit", sans-serif;
+}
+
+.teal-glow {
+  box-shadow: 0 0 30px oklch(0.75 0.16 195 / 0.35), 0 0 80px oklch(0.75 0.16 195 / 0.12);
+}
+
+.teal-glow-sm {
+  box-shadow: 0 0 15px oklch(0.75 0.16 195 / 0.25);
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.85 0.12 195) 0%,
+    oklch(0.95 0.02 200) 40%,
+    oklch(0.75 0.2 185) 60%,
+    oklch(0.85 0.12 195) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(oklch(0.75 0.16 195 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.75 0.16 195 / 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-glow {
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 30%,
+    oklch(0.75 0.16 195 / 0.12) 0%,
+    oklch(0.6 0.13 195 / 0.05) 40%,
+    transparent 70%
+  );
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: oklch(0.75 0.16 195 / 0.4);
+  box-shadow: 0 8px 32px oklch(0.75 0.16 195 / 0.15), 0 0 0 1px oklch(0.75 0.16 195 / 0.1);
+}
+
+.btn-primary-glow {
+  background: oklch(0.75 0.16 195);
+  color: oklch(0.08 0.005 240);
+  transition: all 0.2s ease;
+  box-shadow: 0 0 0 0 oklch(0.75 0.16 195 / 0);
+}
+.btn-primary-glow:hover {
+  background: oklch(0.82 0.18 190);
+  box-shadow: 0 0 20px oklch(0.75 0.16 195 / 0.4), 0 4px 16px oklch(0.75 0.16 195 / 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-outline-teal {
+  border: 1px solid oklch(0.75 0.16 195 / 0.5);
+  color: oklch(0.75 0.16 195);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+.btn-outline-teal:hover {
+  background: oklch(0.75 0.16 195 / 0.1);
+  border-color: oklch(0.75 0.16 195);
+  box-shadow: 0 0 16px oklch(0.75 0.16 195 / 0.2);
+}
+
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
+.pulse-glow-anim {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.noise-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
