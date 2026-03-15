@@ -210,7 +210,8 @@ function Hero() {
           >
             AuraEdge understands context, learns your preferences, and delivers
             instant intelligent responses — so you can focus on what actually
-            matters.
+            matters. This app is powered by Aura Bot and is compatible with the
+            Aura Bot robot.
           </motion.p>
 
           {/* CTAs */}
@@ -542,7 +543,7 @@ function Footer() {
             <div>
               <p className="font-display font-bold text-foreground">AuraEdge</p>
               <p className="text-xs font-body text-muted-foreground">
-                The AI that works as hard as you do
+                Powered by Aura Bot · Compatible with Aura Bot Robot
               </p>
             </div>
           </div>
