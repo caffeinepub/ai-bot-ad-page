@@ -220,6 +220,12 @@ function Hero() {
           >
             <button
               type="button"
+              onClick={() =>
+                window.open(
+                  "https://aura-bot-companion--pardeshilata198.replit.app",
+                  "_blank",
+                )
+              }
               className="btn-primary-glow font-semibold px-8 py-3 rounded-xl flex items-center gap-2 text-base w-full sm:w-auto justify-center"
             >
               Try for Free
@@ -486,7 +492,14 @@ function CTASection() {
           >
             <button
               type="button"
+              onClick={() =>
+                window.open(
+                  "https://aura-bot-companion--pardeshilata198.replit.app",
+                  "_blank",
+                )
+              }
               className="btn-primary-glow font-semibold px-10 py-3.5 rounded-xl flex items-center gap-2 text-base justify-center"
+              data-ocid="cta.primary_button"
             >
               Get Started Free
               <ArrowRight className="w-4 h-4" />
