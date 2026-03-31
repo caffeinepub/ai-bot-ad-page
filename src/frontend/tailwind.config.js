@@ -20,10 +20,10 @@ export default {
         body: ['"Outfit"', "sans-serif"],
       },
       colors: {
-        teal: {
-          DEFAULT: "oklch(var(--teal) / <alpha-value>)",
-          dim: "oklch(var(--teal-dim) / <alpha-value>)",
-          glow: "oklch(var(--teal-glow) / <alpha-value>)",
+        purple: {
+          DEFAULT: "oklch(var(--purple) / <alpha-value>)",
+          dim: "oklch(var(--purple-dim) / <alpha-value>)",
+          glow: "oklch(var(--purple-glow) / <alpha-value>)",
         },
         surface: {
           DEFAULT: "oklch(var(--surface))",

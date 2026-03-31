@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Fonts ─────────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Dark theme — purple/black */
+    --background: 0.06 0.008 300;
+    --foreground: 0.95 0.01 300;
+    --card: 0.1 0.012 300;
+    --card-foreground: 0.95 0.01 300;
+    --popover: 0.1 0.012 300;
+    --popover-foreground: 0.95 0.01 300;
+
+    --primary: 0.65 0.25 305;
+    --primary-foreground: 0.06 0.008 300;
+
+    --secondary: 0.15 0.015 300;
+    --secondary-foreground: 0.95 0.01 300;
+
+    --muted: 0.15 0.015 300;
+    --muted-foreground: 0.55 0.02 300;
+
+    --accent: 0.62 0.22 295;
+    --accent-foreground: 0.06 0.008 300;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.22 0.025 300;
+    --input: 0.2 0.02 300;
+    --ring: 0.65 0.25 305;
+
+    --chart-1: 0.65 0.25 305;
+    --chart-2: 0.55 0.22 295;
+    --chart-3: 0.5 0.18 300;
+    --chart-4: 0.45 0.15 290;
+    --chart-5: 0.4 0.12 310;
+
+    --sidebar: 0.1 0.012 300;
+    --sidebar-foreground: 0.95 0.01 300;
+    --sidebar-primary: 0.65 0.25 305;
+    --sidebar-primary-foreground: 0.06 0.008 300;
+    --sidebar-accent: 0.15 0.015 300;
+    --sidebar-accent-foreground: 0.95 0.01 300;
+    --sidebar-border: 0.22 0.025 300;
+    --sidebar-ring: 0.65 0.25 305;
+
+    /* Custom brand tokens */
+    --purple: 0.65 0.25 305;
+    --purple-dim: 0.5 0.2 300;
+    --purple-glow: 0.75 0.28 295;
+    --surface: 0.11 0.012 300;
+    --surface-raised: 0.16 0.018 300;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+}
+
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px oklch(0.65 0.25 305 / 0.35), 0 0 60px
+      oklch(0.65 0.25 305 / 0.12);
+  }
+  50% {
+    box-shadow: 0 0 40px oklch(0.65 0.25 305 / 0.55), 0 0 100px
+      oklch(0.65 0.25 305 / 0.22);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* ─── Utility Classes ────────────────────────────────────── */
+.font-display {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.font-body {
+  font-family: "Outfit", sans-serif;
+}
+
+/* Glassmorphism utilities */
+.glass-card {
+  background: oklch(0.12 0.015 300 / 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid oklch(0.65 0.25 305 / 0.2);
+}
+
+.glass-nav {
+  background: oklch(0.08 0.01 300 / 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid oklch(0.65 0.25 305 / 0.18);
+}
+
+.glass-hero-badge {
+  background: oklch(0.65 0.25 305 / 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid oklch(0.65 0.25 305 / 0.3);
+}
+
+.purple-glow {
+  box-shadow: 0 0 30px oklch(0.65 0.25 305 / 0.4), 0 0 80px
+    oklch(0.65 0.25 305 / 0.15);
+}
+
+.purple-glow-sm {
+  box-shadow: 0 0 15px oklch(0.65 0.25 305 / 0.3);
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.8 0.18 305) 0%,
+    oklch(0.92 0.08 295) 40%,
+    oklch(0.7 0.28 300) 60%,
+    oklch(0.8 0.18 305) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.grid-bg {
+  background-image: linear-gradient(
+      oklch(0.65 0.25 305 / 0.05) 1px,
+      transparent 1px
+    ), linear-gradient(90deg, oklch(0.65 0.25 305 / 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-glow {
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 30%,
+    oklch(0.65 0.25 305 / 0.15) 0%,
+    oklch(0.5 0.2 300 / 0.06) 40%,
+    transparent 70%
+  );
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: oklch(0.65 0.25 305 / 0.45);
+  box-shadow: 0 8px 32px oklch(0.65 0.25 305 / 0.18), 0 0 0 1px
+    oklch(0.65 0.25 305 / 0.12);
+}
+
+.btn-primary-glow {
+  background: linear-gradient(
+    135deg,
+    oklch(0.55 0.28 305),
+    oklch(0.45 0.22 295)
+  );
+  color: white;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 24px oklch(0.65 0.28 305 / 0.4);
+}
+.btn-primary-glow:hover {
+  background: linear-gradient(135deg, oklch(0.62 0.3 305), oklch(0.52 0.25 295));
+  box-shadow: 0 0 32px oklch(0.65 0.28 305 / 0.55), 0 4px 16px
+    oklch(0.65 0.28 305 / 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-outline-purple {
+  border: 1px solid oklch(0.65 0.25 305 / 0.5);
+  color: oklch(0.75 0.22 305);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+.btn-outline-purple:hover {
+  background: oklch(0.65 0.25 305 / 0.1);
+  border-color: oklch(0.65 0.25 305);
+  box-shadow: 0 0 16px oklch(0.65 0.25 305 / 0.25);
+}
+
+.btn-install {
+  background: linear-gradient(
+    135deg,
+    oklch(0.18 0.05 300),
+    oklch(0.12 0.03 295)
+  );
+  color: oklch(0.82 0.2 305);
+  border: 1px solid oklch(0.65 0.25 305 / 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+.btn-install:hover {
+  background: linear-gradient(
+    135deg,
+    oklch(0.22 0.07 300),
+    oklch(0.16 0.05 295)
+  );
+  border-color: oklch(0.65 0.25 305 / 0.7);
+  box-shadow: 0 0 20px oklch(0.65 0.25 305 / 0.25);
+  transform: translateY(-1px);
+}
+
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
+.pulse-glow-anim {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.noise-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}

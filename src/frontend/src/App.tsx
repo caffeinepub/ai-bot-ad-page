@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Brain,
   CheckCircle2,
+  Download,
   Globe,
   Menu,
   MessageSquare,
@@ -11,6 +12,10 @@ import {
 } from "lucide-react";
 import { AnimatePresence, type Variants, motion } from "motion/react";
 import { useEffect, useState } from "react";
+
+const AURA_URL = "https://aura-bot-companion--pardeshilata198.replit.app";
+const APK_URL =
+  "https://drive.google.com/uc?export=download&id=1GcBrbTRfOR450byGkxU7MShhVcAy987W";
 
 // ─── Stagger variant helpers ────────────────────────────────
 const containerVariants: Variants = {
@@ -51,9 +56,7 @@ function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
+        scrolled ? "glass-nav" : "bg-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -71,7 +74,7 @@ function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {["Features", "Stats", "Pricing"].map((item) => (
+          {["Features", "Stats"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -84,19 +87,16 @@ function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <button
-            type="button"
-            className="btn-outline-teal text-sm font-medium px-4 py-2 rounded-lg"
-          >
-            Sign In
-          </button>
-          <button
-            type="button"
+          <a
+            href={AURA_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary-glow text-sm font-semibold px-5 py-2 rounded-lg flex items-center gap-1.5"
+            data-ocid="nav.primary_button"
           >
-            Get Started
+            Try for Free
             <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+          </a>
         </div>
 
         {/* Mobile menu toggle */}
@@ -123,10 +123,10 @@ function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border overflow-hidden"
+            className="md:hidden glass-nav border-t-0 overflow-hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
-              {["Features", "Stats", "Pricing"].map((item) => (
+              {["Features", "Stats"].map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -136,12 +136,15 @@ function Navbar() {
                   {item}
                 </a>
               ))}
-              <button
-                type="button"
+              <a
+                href={AURA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary-glow text-sm font-semibold px-5 py-2.5 rounded-lg flex items-center justify-center gap-2 w-full"
+                data-ocid="nav.primary_button"
               >
-                Get Started <ArrowRight className="w-4 h-4" />
-              </button>
+                Try for Free <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
           </motion.div>
         )}
@@ -162,7 +165,7 @@ function Hero() {
         className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, oklch(0.75 0.16 195 / 0.15) 0%, transparent 70%)",
+            "radial-gradient(circle, oklch(0.65 0.25 305 / 0.18) 0%, transparent 70%)",
           filter: "blur(40px)",
         }}
       />
@@ -176,9 +179,9 @@ function Hero() {
         >
           {/* Badge */}
           <motion.div variants={itemVariants}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium font-body border border-teal/30 bg-teal/5 text-teal-glow">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-pulse" />
-              Now available — Powered by next-gen AI
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium font-body glass-hero-badge text-purple-glow">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-glow animate-pulse" />
+              Now available — Powered by Aura Bot AI
             </span>
           </motion.div>
 
@@ -199,8 +202,7 @@ function Hero() {
             variants={itemVariants}
             className="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight"
           >
-            The Edge You <br className="hidden sm:block" />
-            <span className="text-shimmer">Always Needed</span>
+            Meet <span className="text-shimmer">AuraEdge</span>
           </motion.h1>
 
           {/* Sub-headline */}
@@ -208,10 +210,8 @@ function Hero() {
             variants={itemVariants}
             className="font-body text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed"
           >
-            AuraEdge understands context, learns your preferences, and delivers
-            instant intelligent responses — so you can focus on what actually
-            matters. This app is powered by Aura Bot and is compatible with the
-            Aura Bot robot.
+            This app is powered by Aura Bot and is compatible with the Aura Bot
+            robot. Your intelligent AI companion for seamless conversations.
           </motion.p>
 
           {/* CTAs */}
@@ -219,26 +219,34 @@ function Hero() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto"
           >
-            <button
-              type="button"
-              onClick={() =>
-                window.open(
-                  "https://aura-bot-companion--pardeshilata198.replit.app",
-                  "_blank",
-                )
-              }
+            <a
+              href={AURA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary-glow font-semibold px-8 py-3 rounded-xl flex items-center gap-2 text-base w-full sm:w-auto justify-center"
+              data-ocid="hero.primary_button"
             >
               Try for Free
               <ArrowRight className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              className="btn-outline-teal font-medium px-8 py-3 rounded-xl text-base w-full sm:w-auto justify-center flex items-center gap-2"
+            </a>
+            <a
+              href="#features"
+              className="btn-outline-purple font-medium px-8 py-3 rounded-xl text-base w-full sm:w-auto justify-center flex items-center gap-2"
+              data-ocid="hero.secondary_button"
             >
               <MessageSquare className="w-4 h-4" />
               Learn More
-            </button>
+            </a>
+            <a
+              href={APK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-install font-semibold px-8 py-3 rounded-xl text-base w-full sm:w-auto justify-center flex items-center gap-2"
+              data-ocid="hero.install_button"
+            >
+              <Download className="w-4 h-4" />
+              Install Now
+            </a>
           </motion.div>
 
           {/* Trust signals */}
@@ -248,10 +256,10 @@ function Hero() {
           >
             <div className="flex">
               {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-teal text-teal" />
+                <Star key={i} className="w-3.5 h-3.5 fill-purple text-purple" />
               ))}
             </div>
-            <span>Trusted by 10M+ teams worldwide</span>
+            <span>Trusted by 10K+ users worldwide</span>
           </motion.div>
         </motion.div>
       </div>
@@ -261,7 +269,7 @@ function Hero() {
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, transparent, oklch(0.1 0.005 240))",
+            "linear-gradient(to bottom, transparent, oklch(0.06 0.008 300))",
         }}
       />
     </section>
@@ -280,18 +288,18 @@ function FeatureCard({ icon, title, description, detail }: FeatureCardProps) {
   return (
     <motion.div
       variants={fadeUp}
-      className="card-hover relative rounded-2xl border border-border bg-card p-6 flex flex-col gap-4 overflow-hidden"
+      className="card-hover glass-card relative rounded-2xl p-6 flex flex-col gap-4 overflow-hidden"
     >
       {/* Corner accent */}
       <div
         className="absolute top-0 right-0 w-24 h-24 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at top right, oklch(0.75 0.16 195 / 0.08) 0%, transparent 70%)",
+            "radial-gradient(circle at top right, oklch(0.65 0.25 305 / 0.1) 0%, transparent 70%)",
         }}
       />
 
-      <div className="w-11 h-11 rounded-xl bg-teal/10 border border-teal/20 flex items-center justify-center text-teal teal-glow-sm">
+      <div className="w-11 h-11 rounded-xl bg-purple/10 border border-purple/20 flex items-center justify-center text-purple purple-glow-sm">
         {icon}
       </div>
 
@@ -310,7 +318,7 @@ function FeatureCard({ icon, title, description, detail }: FeatureCardProps) {
             key={item}
             className="flex items-start gap-2 text-xs font-body text-muted-foreground"
           >
-            <CheckCircle2 className="w-3.5 h-3.5 text-teal shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-purple shrink-0 mt-0.5" />
             {item.trim()}
           </li>
         ))}
@@ -324,27 +332,34 @@ function FeaturesSection() {
   const features = [
     {
       icon: <Zap className="w-5 h-5" />,
-      title: "Smart Replies",
+      title: "Fast Responses",
       description:
         "Instant, intelligent responses available around the clock. No delays, no downtime — just accurate answers when you need them.",
       detail:
         "Sub-50ms response time | Context-aware suggestions | Natural language understanding",
     },
     {
-      icon: <Globe className="w-5 h-5" />,
-      title: "Easy Integration",
-      description:
-        "Connect to any platform in minutes with our developer-friendly API and 50+ pre-built connectors.",
-      detail:
-        "REST & WebSocket API | Slack, Discord, WhatsApp | One-line embed script",
-    },
-    {
       icon: <Brain className="w-5 h-5" />,
-      title: "Always Learning",
+      title: "Smart Learning",
       description:
-        "AuraEdge adapts to your brand voice and gets smarter with every conversation, continuously improving over time.",
+        "AuraEdge adapts to your preferences and gets smarter with every conversation, continuously improving over time.",
       detail:
         "Personalized knowledge base | Feedback-driven refinement | Custom training",
+    },
+    {
+      icon: <Globe className="w-5 h-5" />,
+      title: "Voice Compatible",
+      description:
+        "Fully compatible with the Aura Bot robot for voice interactions and seamless hardware integration.",
+      detail:
+        "Aura Bot robot support | Voice command ready | Hardware integration",
+    },
+    {
+      icon: <MessageSquare className="w-5 h-5" />,
+      title: "Always On",
+      description:
+        "99.9% uptime guarantee ensures AuraEdge is available whenever you need it, 24 hours a day, 7 days a week.",
+      detail: "24/7 availability | 99.9% uptime SLA | Real-time monitoring",
     },
   ];
 
@@ -361,7 +376,7 @@ function FeaturesSection() {
         >
           <motion.p
             variants={itemVariants}
-            className="text-teal font-body text-sm font-semibold uppercase tracking-widest mb-3"
+            className="text-purple font-body text-sm font-semibold uppercase tracking-widest mb-3"
           >
             What makes us different
           </motion.p>
@@ -375,7 +390,7 @@ function FeaturesSection() {
             variants={itemVariants}
             className="mt-4 font-body text-muted-foreground text-lg max-w-xl mx-auto"
           >
-            Three core capabilities that set AuraEdge apart from every other AI
+            Four core capabilities that set AuraEdge apart from every other AI
             solution.
           </motion.p>
         </motion.div>
@@ -386,7 +401,7 @@ function FeaturesSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {features.map((f) => (
             <FeatureCard key={f.title} {...f} />
@@ -400,9 +415,9 @@ function FeaturesSection() {
 // ─── Stats Bar ───────────────────────────────────────────────
 function StatsBar() {
   const stats = [
-    { value: "10M+", label: "Active Users" },
-    { value: "99.9%", label: "Uptime SLA" },
-    { value: "50+", label: "Languages" },
+    { value: "10K+", label: "Active Users" },
+    { value: "99.9%", label: "Uptime" },
+    { value: "24/7", label: "Support" },
     { value: "<50ms", label: "Avg. Response" },
   ];
 
@@ -414,19 +429,19 @@ function StatsBar() {
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
           variants={containerVariants}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border"
+          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-purple/20"
         >
           {stats.map((s) => (
             <motion.div
               key={s.label}
               variants={itemVariants}
-              className="bg-card flex flex-col items-center justify-center py-10 px-6 gap-1.5 relative group overflow-hidden"
+              className="glass-card flex flex-col items-center justify-center py-10 px-6 gap-1.5 relative group overflow-hidden"
             >
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
                   background:
-                    "radial-gradient(ellipse at center, oklch(0.75 0.16 195 / 0.06) 0%, transparent 70%)",
+                    "radial-gradient(ellipse at center, oklch(0.65 0.25 305 / 0.08) 0%, transparent 70%)",
                 }}
               />
               <span className="font-display font-extrabold text-3xl sm:text-4xl text-shimmer">
@@ -452,7 +467,7 @@ function CTASection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 60% at 50% 50%, oklch(0.75 0.16 195 / 0.08) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 60% at 50% 50%, oklch(0.65 0.25 305 / 0.1) 0%, transparent 70%)",
         }}
       />
 
@@ -476,48 +491,48 @@ function CTASection() {
             variants={itemVariants}
             className="font-display font-extrabold text-4xl sm:text-5xl text-foreground leading-tight"
           >
-            Start your free trial <span className="text-shimmer">today</span>
+            Ready to get <span className="text-shimmer">started?</span>
           </motion.h2>
 
           <motion.p
             variants={itemVariants}
             className="font-body text-muted-foreground text-lg max-w-xl"
           >
-            Join over 10 million users who trust AuraEdge to handle their
-            conversations. No credit card required.
+            Join thousands of users who trust AuraEdge for seamless AI
+            conversations. Powered by Aura Bot — no credit card required.
           </motion.p>
 
           <motion.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
           >
-            <button
-              type="button"
-              onClick={() =>
-                window.open(
-                  "https://aura-bot-companion--pardeshilata198.replit.app",
-                  "_blank",
-                )
-              }
+            <a
+              href={AURA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary-glow font-semibold px-10 py-3.5 rounded-xl flex items-center gap-2 text-base justify-center"
               data-ocid="cta.primary_button"
             >
               Get Started Free
               <ArrowRight className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              className="btn-outline-teal font-medium px-8 py-3.5 rounded-xl text-base flex items-center gap-2 justify-center"
+            </a>
+            <a
+              href={APK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-install font-semibold px-10 py-3.5 rounded-xl flex items-center gap-2 text-base justify-center"
+              data-ocid="cta.install_button"
             >
-              View Pricing
-            </button>
+              <Download className="w-4 h-4" />
+              Install Now
+            </a>
           </motion.div>
 
           <motion.p
             variants={itemVariants}
             className="text-xs font-body text-muted-foreground"
           >
-            14-day free trial · No credit card · Cancel anytime
+            Free to use · Powered by Aura Bot · Compatible with Aura Bot Robot
           </motion.p>
         </motion.div>
       </div>
@@ -530,7 +545,7 @@ function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-card/40">
+    <footer className="border-t border-purple/15 bg-card/40">
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand */}
@@ -548,26 +563,6 @@ function Footer() {
             </div>
           </div>
 
-          {/* Links */}
-          <nav className="flex items-center gap-6">
-            {(
-              [
-                { label: "Privacy", href: "#privacy" },
-                { label: "Terms", href: "#terms" },
-                { label: "Docs", href: "#docs" },
-                { label: "Blog", href: "#blog" },
-              ] as { label: string; href: string }[]
-            ).map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-
           {/* Copyright */}
           <p className="text-xs font-body text-muted-foreground text-center">
             © {year}. Built with ♥ using{" "}
@@ -575,7 +570,7 @@ function Footer() {
               href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-teal hover:underline"
+              className="text-purple hover:underline"
             >
               caffeine.ai
             </a>
